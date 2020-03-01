@@ -1,6 +1,9 @@
 import React from 'react';
-import styles from './App.css';
+import Header from './Header/Header';
+// import styles from './App.css';
 
-const App = () => <div className={styles.root}>App</div>;
+const App = () => (
+  <Header />
+);
 
 export default App;
