@@ -1,0 +1,20 @@
+.root {
+  background-color: #3e8856;
+  display: flex;
+  height: 300px;
+}
+
+.title {
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1.17;
+}
+
+.description {
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  width: 730px;
+}
