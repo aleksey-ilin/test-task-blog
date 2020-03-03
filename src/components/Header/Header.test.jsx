@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Header from '../src/components/Header/Header';
+import Header from './Header';
 import '@testing-library/jest-dom';
 
 test('renders logo', () => {
