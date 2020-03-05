@@ -1,8 +1,17 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 html,
 body,
 h1,
 h2,
-p {
+p,
+input,
+textarea,
+button {
   margin: 0;
   padding: 0;
   font-family: 'Ubuntu', Arial, sans-serif;
@@ -13,10 +22,10 @@ body {
 }
 
 button {
-  padding: 0;
-  font-family: 'Ubuntu', Arial, sans-serif;
   border: 0;
+  border-radius: 0;
   outline: none;
+  cursor: pointer;
 }
 
 button:focus {
@@ -25,6 +34,5 @@ button:focus {
 
 ul {
   margin: 0;
-  box-sizing: border-box;
   list-style: none;
 }
