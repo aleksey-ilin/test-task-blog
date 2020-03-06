@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/bind';
 import defaultImage from '../../assets/defaultImage.svg';
 import styles from './Modal.css';
+
+const cx = classNames.bind(styles);
 
 const Modal = ({ toggleShowModal }) => {
   const [photo, uploadPhoto] = useState(null);
@@ -12,14 +15,18 @@ const Modal = ({ toggleShowModal }) => {
       <div className={styles.modal}>
         <button className={styles.close} type="button" onClick={() => toggleShowModal()}>×</button>
         <h2 className={styles.heading}>Add new</h2>
-        <div className={styles.photo}>
+        <div className={cx({ photo: true, photo__default: !photo })}>
           <input
             className={styles.photo__input}
             type="file"
             accept="image/*"
             onChange={(event) => uploadPhoto(event.target.files[0])}
           />
-          <img className={styles.photo__photo} src={photo ? photoUrl : defaultImage} alt="upload" />
+          <img
+            className={photo && styles.photo__webinarPhoto}
+            src={photo ? photoUrl : defaultImage}
+            alt="upload"
+          />
           {!!photo || (
             <p className={styles.photo__description}>
               select an image file to upload or drag it here
