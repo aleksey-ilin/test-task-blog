@@ -4,7 +4,7 @@ import defaultImage from '../../assets/defaultImage.svg';
 import styles from './Modal.css';
 
 const Modal = ({ toggleShowModal }) => {
-  const [photos, uploadPhotos] = useState([]);
+  const [photo, uploadPhoto] = useState(null);
 
   return (
     <div className={styles.container}>
@@ -16,8 +16,7 @@ const Modal = ({ toggleShowModal }) => {
             className={styles.photo__input}
             type="file"
             accept="image/*"
-            multiple
-            onChange={(event) => uploadPhotos([...photos, ...event.target.files])}
+            onChange={(event) => uploadPhoto(event.target.files)}
           />
           <img src={defaultImage} alt="upload" />
           <p className={styles.photo__description}>
