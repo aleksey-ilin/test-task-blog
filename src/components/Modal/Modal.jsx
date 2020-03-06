@@ -5,6 +5,7 @@ import styles from './Modal.css';
 
 const Modal = ({ toggleShowModal }) => {
   const [photo, uploadPhoto] = useState(null);
+  const photoUrl = photo && URL.createObjectURL(photo);
 
   return (
     <div className={styles.container}>
@@ -16,12 +17,14 @@ const Modal = ({ toggleShowModal }) => {
             className={styles.photo__input}
             type="file"
             accept="image/*"
-            onChange={(event) => uploadPhoto(event.target.files)}
+            onChange={(event) => uploadPhoto(event.target.files[0])}
           />
-          <img src={defaultImage} alt="upload" />
-          <p className={styles.photo__description}>
-            select an image file to upload or drag it here
-          </p>
+          <img className={styles.photo__photo} src={photo ? photoUrl : defaultImage} alt="upload" />
+          {!!photo || (
+            <p className={styles.photo__description}>
+              select an image file to upload or drag it here
+            </p>
+          )}
         </div>
         <label className={styles.title} htmlFor="title">
           Title
