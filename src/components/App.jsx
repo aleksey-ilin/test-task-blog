@@ -1,15 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from './Header/Header';
-import Main from './Main/Main';
-import Modal from './Modal/Modal';
+import Main from '../containers/Main';
+import Modal from '../containers/Modal';
 import styles from './App.css';
 
-const App = () => (
+const App = ({ isShowModal }) => (
   <div className={styles.app}>
     <Header />
     <Main />
-    <Modal />
+    {isShowModal && <Modal />}
   </div>
 );
 
-export default App;
+App.propTypes = {
+  isShowModal: PropTypes.bool,
+};
+
+App.defaultProps = {
+  isShowModal: false,
+};
+
+export default connect((store) => ({ isShowModal: store.isShowModal }))(App);

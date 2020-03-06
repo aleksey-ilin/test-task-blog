@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import defaultImage from '../../assets/defaultImage.svg';
 import styles from './Modal.css';
 
-const Modal = () => {
+const Modal = ({ toggleShowModal }) => {
   const [photos, uploadPhotos] = useState([]);
 
   return (
     <div className={styles.container}>
       <div className={styles.modal}>
-        <button className={styles.close} type="button">×</button>
+        <button className={styles.close} type="button" onClick={() => toggleShowModal()}>×</button>
         <h2 className={styles.heading}>Add new</h2>
         <div className={styles.photo}>
           <input
@@ -35,6 +36,14 @@ const Modal = () => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  toggleShowModal: PropTypes.func,
+};
+
+Modal.defaultProps = {
+  toggleShowModal: () => null,
 };
 
 export default Modal;
