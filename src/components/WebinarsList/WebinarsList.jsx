@@ -2,12 +2,17 @@ import React from 'react';
 import Webinar from '../Webinar/Webinar';
 import styles from './WebinarsList.css';
 
-const webinars = [1, 2, 3, 4, 5];
+const WebinarsList = () => {
+  const webinars = JSON.parse(localStorage.getItem('webinars'));
 
-const WebinarsList = () => (
-  <ul className={styles.root}>
-    {webinars.map((webinar) => <Webinar key={webinar} webinar={webinar} />)}
-  </ul>
-);
+  if (webinars) {
+    return (
+      <ul className={styles.root}>
+        {webinars.map((webinar) => <Webinar key={webinar.id} webinar={webinar} />)}
+      </ul>
+    );
+  }
+  return null;
+};
 
 export default WebinarsList;

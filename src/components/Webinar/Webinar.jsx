@@ -1,16 +1,29 @@
 import React from 'react';
-import logo from '../../assets/logo.svg';
+import PropTypes from 'prop-types';
 import styles from './Webinar.css';
 
-const Webinar = () => (
+const Webinar = ({ webinar }) => (
   <li className={styles.root}>
-    <img className={styles.image} src={logo} alt="img" />
-    <h2 className={styles.title}>HTTPS & SSL Does Not Mean You Have a Secure Website</h2>
-    <p className={styles.description}>
-      Having an SSL certificate does not mean you have a secure website,
-      and with the new European GDPR regulations
-    </p>
+    <img className={styles.image} src={webinar.photo} alt="img" />
+    <h2 className={styles.title}>{webinar.title}</h2>
+    <p className={styles.description}>{webinar.description}</p>
   </li>
 );
+
+Webinar.propTypes = {
+  webinar: PropTypes.shape({
+    title: PropTypes.string,
+    description: PropTypes.string,
+    photo: PropTypes.string,
+  }),
+};
+
+Webinar.defaultProps = {
+  webinar: {
+    title: 'Title is not defined',
+    description: 'Description is not defined',
+    photo: 'no photo',
+  },
+};
 
 export default Webinar;

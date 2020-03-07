@@ -9,7 +9,28 @@ const cx = classNames.bind(styles);
 
 const Modal = ({ toggleShowModal }) => {
   const [photo, uploadPhoto] = useState(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
   const photoUrl = photo && URL.createObjectURL(photo);
+
+  const save = () => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const webinars = JSON.parse(localStorage.getItem('webinars')) || [];
+      const newWebinarId = webinars.length;
+      const newWebinar = {
+        id: newWebinarId,
+        title,
+        description,
+        photo: reader.result,
+      };
+      const updatedWebinars = [...webinars, newWebinar];
+      localStorage.setItem('webinars', JSON.stringify(updatedWebinars));
+    };
+    reader.readAsDataURL(photo);
+    toggleShowModal();
+  };
 
   return (
     <div className={styles.container}>
@@ -45,13 +66,26 @@ const Modal = ({ toggleShowModal }) => {
         </div>
         <label className={styles.title} htmlFor="title">
           Title
-          <input className={styles.title__field} type="text" id="title" placeholder="Enter title" />
+          <input
+            className={styles.title__field}
+            type="text"
+            id="title"
+            placeholder="Enter title"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
         </label>
         <label className={styles.description} htmlFor="description">
           Description
-          <textarea className={styles.description__field} id="description" placeholder="Enter description" />
+          <textarea
+            className={styles.description__field}
+            id="description"
+            placeholder="Enter description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
         </label>
-        <button className={styles.button} type="button">Save</button>
+        <button className={styles.button} type="button" onClick={save}>Save</button>
       </div>
     </div>
   );
