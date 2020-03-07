@@ -3,7 +3,7 @@ import logo from '../../assets/logo.svg';
 import styles from './Webinar.css';
 
 const Webinar = () => (
-  <li className={styles.webinar}>
+  <li className={styles.root}>
     <img className={styles.image} src={logo} alt="img" />
     <h2 className={styles.title}>HTTPS & SSL Does Not Mean You Have a Secure Website</h2>
     <p className={styles.description}>

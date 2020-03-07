@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './Pagination.css';
 
 const Pagination = ({ pagination }) => (
-  <li className={styles.pagination}>
+  <li className={styles.root}>
     <button type="button" className={styles.button}>{pagination}</button>
   </li>
 );

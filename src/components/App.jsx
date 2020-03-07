@@ -7,7 +7,7 @@ import Modal from '../containers/Modal';
 import styles from './App.css';
 
 const App = ({ isShowModal }) => (
-  <div className={styles.app}>
+  <div className={styles.root}>
     <Header />
     <Main />
     {isShowModal && <Modal />}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import defaultImage from '../../assets/defaultImage.svg';
+import photoDelete from '../../assets/photoDelete.svg';
 import styles from './Modal.css';
 
 const cx = classNames.bind(styles);
@@ -12,16 +13,25 @@ const Modal = ({ toggleShowModal }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.modal}>
+      <div className={styles.root}>
         <button className={styles.close} type="button" onClick={() => toggleShowModal()}>×</button>
         <h2 className={styles.heading}>Add new</h2>
-        <div className={cx({ photo: true, photo__default: !photo })}>
+        <div className={cx({ photo: true, photoDefault: !photo })}>
           <input
             className={styles.photo__input}
             type="file"
             accept="image/*"
             onChange={(event) => uploadPhoto(event.target.files[0])}
           />
+          {photo && (
+            <button
+              type="button"
+              className={styles.photo__delete}
+              onClick={() => uploadPhoto(null)}
+            >
+              <img src={photoDelete} alt="delete" />
+            </button>
+          )}
           <img
             className={photo && styles.photo__webinarPhoto}
             src={photo ? photoUrl : defaultImage}
