@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import defaultImage from '../../assets/defaultImage.svg';
+import addImage from '../../assets/addImage.svg';
 import photoDelete from '../../assets/photoDelete.svg';
-import styles from './Modal.css';
+import styles from './CreateWebinar.css';
 
 const cx = classNames.bind(styles);
 
@@ -15,21 +15,26 @@ const Modal = ({ toggleShowModal, addWebinar }) => {
   const photoUrl = photo && URL.createObjectURL(photo);
 
   const save = () => {
+    const webinars = JSON.parse(localStorage.getItem('webinars')) || [];
+    const newWebinarId = webinars.length;
+    const newWebinar = {
+      id: newWebinarId,
+      title,
+      description,
+      photo: null,
+    };
+    const updatedWebinars = [...webinars, newWebinar];
+
     const reader = new FileReader();
     reader.onloadend = () => {
-      const webinars = JSON.parse(localStorage.getItem('webinars')) || [];
-      const newWebinarId = webinars.length;
-      const newWebinar = {
-        id: newWebinarId,
-        title,
-        description,
-        photo: reader.result,
-      };
-      const updatedWebinars = [...webinars, newWebinar];
-      addWebinar(newWebinar);
-      localStorage.setItem('webinars', JSON.stringify(updatedWebinars));
+      newWebinar.photo = reader.result;
     };
-    reader.readAsDataURL(photo);
+    if (photo) {
+      reader.readAsDataURL(photo);
+    }
+
+    addWebinar(newWebinar);
+    localStorage.setItem('webinars', JSON.stringify(updatedWebinars));
     toggleShowModal();
   };
 
@@ -56,7 +61,7 @@ const Modal = ({ toggleShowModal, addWebinar }) => {
           )}
           <img
             className={photo && styles.photo__webinarPhoto}
-            src={photo ? photoUrl : defaultImage}
+            src={photo ? photoUrl : addImage}
             alt="upload"
           />
           {!!photo || (
