@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import WebinarsList from '../../containers/WebinarsList';
-import PaginationsList from '../PaginationsList/PaginationsList';
+import PaginationsList from '../../containers/PaginationsList';
 import styles from './Main.css';
 
 const Main = ({ toggleShowModal }) => (

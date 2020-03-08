@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import styles from './Pagination.css';
 
-const Pagination = ({ pagination }) => (
+const Pagination = ({ pageNum }) => (
   <li className={styles.root}>
-    <button type="button" className={styles.button}>{pagination}</button>
+    <Link to={`/?page=${pageNum}`} className={styles.button}>{pageNum}</Link>
   </li>
 );
 
 Pagination.propTypes = {
-  pagination: PropTypes.number,
+  pageNum: PropTypes.number,
 };
 
 Pagination.defaultProps = {
-  pagination: [],
+  pageNum: [],
 };
 
 export default Pagination;

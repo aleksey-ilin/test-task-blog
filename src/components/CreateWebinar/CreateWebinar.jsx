@@ -7,36 +7,37 @@ import styles from './CreateWebinar.css';
 
 const cx = classNames.bind(styles);
 
-const Modal = ({ toggleShowModal, addWebinar }) => {
+const CreateWebinar = ({ toggleShowModal, addWebinar, webinars }) => {
   const [photo, uploadPhoto] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const photoUrl = photo && URL.createObjectURL(photo);
+  const getImage = () => {
+    const reader = new FileReader();
+    reader.readAsDataURL(photo);
+    const image = new Promise((resolve) => {
+      reader.onloadend = () => resolve(reader.result);
+    });
+    return image;
+  };
 
-  const save = () => {
-    const webinars = JSON.parse(localStorage.getItem('webinars')) || [];
+  const save = async () => {
     const newWebinarId = webinars.length;
+    const newWebinarPhoto = photo && await getImage();
     const newWebinar = {
       id: newWebinarId,
       title,
       description,
-      photo: null,
+      photo: newWebinarPhoto,
     };
     const updatedWebinars = [...webinars, newWebinar];
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      newWebinar.photo = reader.result;
-    };
-    if (photo) {
-      reader.readAsDataURL(photo);
-    }
 
     addWebinar(newWebinar);
     localStorage.setItem('webinars', JSON.stringify(updatedWebinars));
     toggleShowModal();
   };
+
+  const photoUrl = photo && URL.createObjectURL(photo);
 
   return (
     <div className={styles.container}>
@@ -97,14 +98,21 @@ const Modal = ({ toggleShowModal, addWebinar }) => {
   );
 };
 
-Modal.propTypes = {
+CreateWebinar.propTypes = {
   toggleShowModal: PropTypes.func,
   addWebinar: PropTypes.func,
+  webinars: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    photo: PropTypes.string,
+  })),
 };
 
-Modal.defaultProps = {
+CreateWebinar.defaultProps = {
   toggleShowModal: () => null,
   addWebinar: () => null,
+  webinars: [],
 };
 
-export default Modal;
+export default CreateWebinar;

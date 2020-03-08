@@ -4,6 +4,7 @@ import { toggleShowModal, addWebinar } from '../actions/index';
 const initialState = {
   isShowModal: false,
   webinars: JSON.parse(localStorage.getItem('webinars')) || [],
+  webinarsPerPage: 2,
 };
 
 const reducer = createReducer(initialState, {
