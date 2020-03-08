@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WebinarsList from '../WebinarsList/WebinarsList';
+import WebinarsList from '../../containers/WebinarsList';
 import PaginationsList from '../PaginationsList/PaginationsList';
 import styles from './Main.css';
 
@@ -12,7 +12,13 @@ const Main = ({ toggleShowModal }) => (
         Here you can register and take part in educational
         webinars conducted by the best digital marketing experts.
       </p>
-      <button type="button" className={styles.header__button} onClick={() => toggleShowModal()}>Add new</button>
+      <button
+        type="button"
+        className={styles.header__button}
+        onClick={() => toggleShowModal()}
+      >
+        Add new
+      </button>
     </header>
     <WebinarsList />
     <PaginationsList />

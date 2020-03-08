@@ -7,7 +7,7 @@ import styles from './Modal.css';
 
 const cx = classNames.bind(styles);
 
-const Modal = ({ toggleShowModal }) => {
+const Modal = ({ toggleShowModal, addWebinar }) => {
   const [photo, uploadPhoto] = useState(null);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -26,6 +26,7 @@ const Modal = ({ toggleShowModal }) => {
         photo: reader.result,
       };
       const updatedWebinars = [...webinars, newWebinar];
+      addWebinar(newWebinar);
       localStorage.setItem('webinars', JSON.stringify(updatedWebinars));
     };
     reader.readAsDataURL(photo);
@@ -93,10 +94,12 @@ const Modal = ({ toggleShowModal }) => {
 
 Modal.propTypes = {
   toggleShowModal: PropTypes.func,
+  addWebinar: PropTypes.func,
 };
 
 Modal.defaultProps = {
   toggleShowModal: () => null,
+  addWebinar: () => null,
 };
 
 export default Modal;

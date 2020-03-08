@@ -1,12 +1,19 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { toggleShowModal } from '../actions/index';
+import { toggleShowModal, addWebinar } from '../actions/index';
 
-const initialState = { isShowModal: false };
+const initialState = {
+  isShowModal: false,
+  webinars: JSON.parse(localStorage.getItem('webinars')) || [],
+};
 
 const reducer = createReducer(initialState, {
-  [toggleShowModal]: (prevState) => {
-    const state = prevState;
-    state.isShowModal = !state.isShowModal;
+  [toggleShowModal]: (state) => {
+    const prevState = state;
+    prevState.isShowModal = !prevState.isShowModal;
+  },
+  [addWebinar]: (state, action) => {
+    const prevState = state;
+    prevState.webinars = [...prevState.webinars, action.payload];
   },
 });
 

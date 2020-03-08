@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './Header/Header';
 import Main from '../containers/Main';
@@ -22,4 +21,4 @@ App.defaultProps = {
   isShowModal: false,
 };
 
-export default connect((store) => ({ isShowModal: store.isShowModal }))(App);
+export default App;

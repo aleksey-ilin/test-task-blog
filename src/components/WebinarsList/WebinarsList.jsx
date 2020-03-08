@@ -1,10 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Webinar from '../Webinar/Webinar';
 import styles from './WebinarsList.css';
 
-const WebinarsList = () => {
-  const webinars = JSON.parse(localStorage.getItem('webinars'));
-
+const WebinarsList = ({ webinars }) => {
   if (webinars) {
     return (
       <ul className={styles.root}>
@@ -13,6 +12,19 @@ const WebinarsList = () => {
     );
   }
   return null;
+};
+
+WebinarsList.propTypes = {
+  webinars: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    photo: PropTypes.string,
+  })),
+};
+
+WebinarsList.defaultProps = {
+  webinars: [],
 };
 
 export default WebinarsList;
