@@ -7,7 +7,7 @@ const PaginationsList = ({ webinars, webinarsPerPage }) => {
   const webinarsCount = webinars.length;
   const pagesCount = Math.round(webinarsCount / webinarsPerPage);
 
-  if (pagesCount >= 1) {
+  if (webinarsCount > webinarsPerPage && pagesCount >= 1) {
     return (
       <ul className={styles.root}>
         {[...Array(pagesCount).keys()]
