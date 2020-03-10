@@ -16,6 +16,7 @@ const Main = ({ toggleShowModal }) => (
         type="button"
         className={styles.header__button}
         onClick={() => toggleShowModal()}
+        data-testid="add-new"
       >
         Add new
       </button>

@@ -40,7 +40,7 @@ const CreateWebinar = ({ toggleShowModal, addWebinar, webinars }) => {
   const photoUrl = photo && URL.createObjectURL(photo);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-testid="create-webinar">
       <div className={styles.root}>
         <button className={styles.close} type="button" onClick={() => toggleShowModal()}>×</button>
         <h2 className={styles.heading}>Add new</h2>
